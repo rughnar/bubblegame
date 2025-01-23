@@ -24,8 +24,8 @@ public class BubbleController : MonoBehaviour
     {
         if (_rb2D.velocity.y <= 0)
         {
-            velocityText.text = "" + 0;
             Time.timeScale = 0;
+            velocityText.text = "" + 0;
             Debug.Log("Fin de juego");
         }
     }
