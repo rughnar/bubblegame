@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System;
 
 public class BubbleController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class BubbleController : MonoBehaviour
     private float targetValue = 0f;
     private SpriteRenderer spriteRenderer;
     private bool hasLaunched;
+    private float maxVelocityReached;
+
 
     void Awake()
     {
@@ -21,6 +24,15 @@ public class BubbleController : MonoBehaviour
         StartCoroutine(UpdateVelocity());
         hasLaunched = false;
         _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
+        maxVelocityReached = 0f;
+    }
+
+    void Update()
+    {
+        if (_rb2D.velocity.magnitude > maxVelocityReached)
+        {
+            maxVelocityReached = _rb2D.velocity.magnitude;
+        }
     }
 
     void FixedUpdate()
@@ -29,9 +41,11 @@ public class BubbleController : MonoBehaviour
         {
             _rb2D.velocity = Vector2.zero;
             _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
-
+            FindObjectOfType<GameManager>().End(maxVelocityReached, _rb2D.position.y);
             Debug.Log("Fin de juego");
         }
+
+
     }
 
 
@@ -49,7 +63,7 @@ public class BubbleController : MonoBehaviour
     }
     private IEnumerator UpdateVelocity()
     {
-        velocityText.text = "" + LimitDecimals(_rb2D.velocity.y, 1) + " m/s"; // Actualiza el texto con 1 decimal
+        velocityText.text = "" + LimitDecimals(_rb2D.velocity.magnitude, 1) + " m/s"; // Actualiza el texto con 1 decimal
         yield return new WaitForSeconds(0f); // Espera un frame antes de continuar
         StartCoroutine(UpdateVelocity());
     }

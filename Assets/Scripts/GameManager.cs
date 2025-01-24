@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
-{/*
+{
     public float tiempoDeJuegoReal = 0;
     public int score = 0;
     public float multiplier = 1;
@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject helpMenu;
     [SerializeField] private AudioClip winSound;
     [SerializeField] private AudioClip loseSound;
-    [SerializeField] Transform spawnTransform;
     public KeyCode resetKey = KeyCode.R;
     public KeyCode pauseKey = KeyCode.P;
     public KeyCode alternativeResumeKey = KeyCode.Escape;
@@ -29,11 +28,8 @@ public class GameManager : MonoBehaviour
     private int sceneIndexToLoadIfReset;
     private AudioManager audioManager;
 
-    private EnemyManager enemyManager;
-    private PlayerMovement playerMovement;
-    private PlayerController playerController;
     private UIController uIController;
-
+    private ScoreMenuController scoreMenuController;
 
     // Start is called before the first frame update
     void Start()
@@ -44,10 +40,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        enemyManager = FindObjectOfType<EnemyManager>();
-        playerMovement = FindObjectOfType<PlayerMovement>();
-        playerController = FindObjectOfType<PlayerController>();
         uIController = FindObjectOfType<UIController>();
+        scoreMenuController = FindObjectOfType<ScoreMenuController>();
     }
 
     // Update is called once per frame
@@ -109,66 +103,56 @@ public class GameManager : MonoBehaviour
         }
 
 
-}
+    }
 
-public void WinGame()
-{
-    //   playerBehaviourController.Celebrate();
+    public void WinGame()
+    {
+        //   playerBehaviourController.Celebrate();
 
-    winScreen.SetActive(true);
-    gameEnded = true;
-    sceneIndexToLoadIfReset = 0;
-    Time.timeScale = 0;
-    //soundManager.PlaySFX(winSound);
-}
+        winScreen.SetActive(true);
+        gameEnded = true;
+        sceneIndexToLoadIfReset = 0;
+        Time.timeScale = 0;
+        //soundManager.PlaySFX(winSound);
+    }
 
-public void Pause()
-{
-    Time.timeScale = 0;
-    pauseScreen.SetActive(true);
-    gamePaused = true;
-    playerMovement.enabled = false;
-    playerController.enabled = false;
-}
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
+        gamePaused = true;
+    }
 
-public void Resume()
-{
-    Time.timeScale = 1;
-    pauseScreen.SetActive(false);
-    gamePaused = false;
-    playerMovement.enabled = true;
-    playerController.enabled = true;
-}
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        pauseScreen.SetActive(false);
+        gamePaused = false;
+    }
 
-public void BackToMainMenu() { SceneManager.LoadScene(0); }
+    public void BackToMainMenu() { SceneManager.LoadScene(0); }
 
+    private void Score()
+    {
+        PlayerPrefs.SetString("score", "" + score);
+        PlayerPrefs.Save();
+    }
 
-public Transform GetSpawnPoint() { return spawnTransform; }
+    public void AddToScore(int scorePoints)
+    {
+        score += (int)(scorePoints * multiplier);
+        uIController.SetScoreSilently(score);
+    }
 
-private void Score()
-{
-    PlayerPrefs.SetString("score", "" + score);
-    PlayerPrefs.Save();
-}
+    public void End(float maxVelocityReached, float maxDistanceReached)
+    {
+        Debug.Log("maxVelocityReached: " + maxVelocityReached);
+        Debug.Log("maxDistanceReached: " + maxDistanceReached);
+        pauseScreen.SetActive(true);
+        scoreMenuController.SoftActive();
+        float score = Mathf.Ceil(Mathf.Round(maxDistanceReached) * 100 + maxVelocityReached * 2);
+        scoreMenuController.SetMaxValues(maxDistanceReached, maxVelocityReached, score);
+    }
 
-public void AddToScore(int scorePoints)
-{
-    score += (int)(scorePoints * multiplier);
-    uIController.SetScoreSilently(score);
-}
-
-public void AddToMultiplier(float multiplierBonus)
-{
-    multiplier += multiplierBonus;
-    multiplier = Mathf.Round(multiplier * 10f) / 10f;
-    uIController.IncreaseMultiplier(multiplier);
-}
-
-public void ReduceMultiplierTo1()
-{
-    multiplier = 1;
-    uIController.IncreaseMultiplier(1);
-}
-*/
 }
 
