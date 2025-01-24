@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class CannonController : MonoBehaviour
 {
-    public float fireForce = 100;
+    public float fireForce = 25;
     public float rotationSpeed = 10f;
     public VelocityBarController velocityBar;
     public TMP_Text heightText;
@@ -15,7 +15,7 @@ public class CannonController : MonoBehaviour
     private BubbleController bubbleController;
     private PlayerInputActions playerInputActions;
     private InputAction _fire;
-
+    private Vector3 direction;
     void Awake()
     {
 
@@ -55,7 +55,7 @@ public class CannonController : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
 
         // Calcula la dirección desde el objeto hacia la posición del mouse
-        Vector3 direction = mousePosition - transform.position;
+        direction = mousePosition - transform.position;
 
         // Calcula el ángulo de rotación en base a la dirección
         //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -68,7 +68,7 @@ public class CannonController : MonoBehaviour
         bubbleController.SoftEnable();
         float force = velocityBar.GetValue();
         velocityBar.gameObject.SetActive(false);
-        bubbleController.ApplyForce(force * fireForce);
+        bubbleController.ApplyForce(direction.normalized * force * fireForce);
         heightText.enabled = true;
         velocityText.enabled = true;
         this.enabled = false;

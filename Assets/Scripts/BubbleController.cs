@@ -37,12 +37,14 @@ public class BubbleController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (hasLaunched && _rb2D.velocity.x <= 0 && _rb2D.velocity.y <= 0)
+        if (hasLaunched && _rb2D.velocity.magnitude == 0)
         {
             _rb2D.velocity = Vector2.zero;
             _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
             FindObjectOfType<GameManager>().End(maxVelocityReached, _rb2D.position.y);
             Debug.Log("Fin de juego");
+            this.enabled = false;
+
         }
 
 
@@ -82,9 +84,9 @@ public class BubbleController : MonoBehaviour
         _rb2D.constraints = RigidbodyConstraints2D.None;
     }
 
-    public void ApplyForce(float force)
+    public void ApplyForce(Vector2 force)
     {
-        _rb2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        _rb2D.AddForce(force, ForceMode2D.Impulse);
         hasLaunched = true;
     }
 }
