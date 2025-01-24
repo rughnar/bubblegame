@@ -11,9 +11,11 @@ public class BubbleController : MonoBehaviour
     private Rigidbody2D _rb2D;
     private float currentValue = 0f;
     private float targetValue = 0f;
+    private SpriteRenderer spriteRenderer;
 
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         _rb2D = GetComponent<Rigidbody2D>();
         StartCoroutine(UpdateHeight());
         StartCoroutine(UpdateVelocity());
@@ -48,5 +50,18 @@ public class BubbleController : MonoBehaviour
         velocityText.text = "" + LimitDecimals(_rb2D.velocity.y, 1) + " m/s"; // Actualiza el texto con 1 decimal
         yield return new WaitForSeconds(0f); // Espera un frame antes de continuar
         StartCoroutine(UpdateVelocity());
+    }
+
+    public void SoftDisable()
+    {
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = false;
+        this.enabled = false;
+    }
+
+    public void SoftEnable()
+    {
+        spriteRenderer.enabled = true;
+        this.enabled = true;
     }
 }
