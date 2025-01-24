@@ -4,7 +4,6 @@ using System.Collections;
 
 public class BubbleController : MonoBehaviour
 {
-    public float initialForce = 100f;
 
     public TMP_Text heightText;
     public TMP_Text velocityText;
@@ -12,6 +11,7 @@ public class BubbleController : MonoBehaviour
     private float currentValue = 0f;
     private float targetValue = 0f;
     private SpriteRenderer spriteRenderer;
+    private bool hasLaunched;
 
     void Awake()
     {
@@ -19,15 +19,17 @@ public class BubbleController : MonoBehaviour
         _rb2D = GetComponent<Rigidbody2D>();
         StartCoroutine(UpdateHeight());
         StartCoroutine(UpdateVelocity());
-        _rb2D.AddForce(Vector2.up * initialForce, ForceMode2D.Impulse);
+        hasLaunched = false;
+        _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
     }
 
     void FixedUpdate()
     {
-        if (_rb2D.velocity.y <= 0)
+        if (hasLaunched && _rb2D.velocity.x <= 0 && _rb2D.velocity.y <= 0)
         {
-            Time.timeScale = 0;
-            velocityText.text = "" + 0;
+            _rb2D.velocity = Vector2.zero;
+            _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
+
             Debug.Log("Fin de juego");
         }
     }
@@ -63,5 +65,12 @@ public class BubbleController : MonoBehaviour
     {
         spriteRenderer.enabled = true;
         this.enabled = true;
+        _rb2D.constraints = RigidbodyConstraints2D.None;
+    }
+
+    public void ApplyForce(float force)
+    {
+        _rb2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        hasLaunched = true;
     }
 }

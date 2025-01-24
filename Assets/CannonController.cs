@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public class CannonController : MonoBehaviour
 {
+    public float fireForce = 100;
     public float rotationSpeed = 10f;
-    public Image radialbar;
+    public VelocityBarController velocityBar;
     public TMP_Text heightText;
     public TMP_Text velocityText;
     private BubbleController bubbleController;
@@ -19,8 +20,9 @@ public class CannonController : MonoBehaviour
     {
 
         bubbleController = FindObjectOfType<BubbleController>();
+        velocityBar = FindObjectOfType<VelocityBarController>();
         bubbleController.SoftDisable();
-        radialbar.enabled = true;
+        velocityBar.gameObject.SetActive(true);
         heightText.enabled = false;
         velocityText.enabled = false;
         playerInputActions = new PlayerInputActions();
@@ -63,8 +65,10 @@ public class CannonController : MonoBehaviour
 
     void Fire(InputAction.CallbackContext callbackContext)
     {
-        radialbar.enabled = false;
         bubbleController.SoftEnable();
+        float force = velocityBar.GetValue();
+        velocityBar.gameObject.SetActive(false);
+        bubbleController.ApplyForce(force * fireForce);
         heightText.enabled = true;
         velocityText.enabled = true;
         this.enabled = false;

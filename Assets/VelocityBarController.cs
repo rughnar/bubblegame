@@ -7,7 +7,7 @@ public class VelocityBarController : MonoBehaviour
 {
 
     public float stepChangeValue = 0.1f;
-    public float maxFillAmount = 0.5f;
+    public float maxFillAmount = 1f;
     public float timeToWait = 0.1f;
     private Image image;
     private int inverter = 1;

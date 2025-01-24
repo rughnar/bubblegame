@@ -560,8 +560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7b06c7d8bf8e04e94ef5d8d5308df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireForce: 100
   rotationSpeed: 10
-  radialbar: {fileID: 1617032700}
+  velocityBar: {fileID: 0}
   heightText: {fileID: 2119302397}
   velocityText: {fileID: 1288573806}
 --- !u!1 &354384600
@@ -2892,15 +2893,15 @@ RectTransform:
   m_GameObject: {fileID: 1617032698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354384604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -479.9, y: -335.4}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -448.1, y: -266.4}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617032700
 MonoBehaviour:
@@ -2922,14 +2923,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a7af74115ac17644fa04b985897340ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b94b2a02c181adc43a3c6723e83c1e6c, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 0.5
+  m_FillMethod: 3
+  m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 3
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1617032701
@@ -2952,9 +2953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074753d05cbac84499f31f8d041b41eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepChangeValue: 0.03
-  maxFillAmount: 0.5
-  timeToWait: 0.03
+  stepChangeValue: 0.04
+  maxFillAmount: 1
+  timeToWait: 0.023
 --- !u!1 &1644683621
 GameObject:
   m_ObjectHideFlags: 0
@@ -3711,7 +3712,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 2
+  m_Constraints: 0
 --- !u!58 &2003149087
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3759,7 +3760,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68c056903dda5048a930504d68c95b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialForce: 100
   heightText: {fileID: 2119302397}
   velocityText: {fileID: 1288573806}
 --- !u!114 &2003149089
