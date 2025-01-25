@@ -35,7 +35,7 @@ public class BubbleController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (hasLaunched && _rb2D.velocity.magnitude == 0)
+        if (hasLaunched && _rb2D.velocity.y <= 0)
         {
             _rb2D.velocity = Vector2.zero;
             _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
