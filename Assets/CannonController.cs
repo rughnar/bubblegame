@@ -10,7 +10,7 @@ public class CannonController : MonoBehaviour
     public float rotationSpeed = 10f;
     public VelocityBarController velocityBar;
 
-    private BubbleController bubbleController;
+    private PlayerController bubbleController;
     private PlayerInputActions playerInputActions;
     private InputAction _fire;
     private Vector3 direction;
@@ -18,7 +18,7 @@ public class CannonController : MonoBehaviour
 
     void Awake()
     {
-        bubbleController = FindObjectOfType<BubbleController>();
+        bubbleController = FindObjectOfType<PlayerController>();
         velocityBar = FindObjectOfType<VelocityBarController>();
         bubbleController.SoftDisable();
         playerInputActions = new PlayerInputActions();

@@ -13,7 +13,8 @@ public class EnemyController : MonoBehaviour
     //private EnemyManager _enemyManager;
     private SpriteRenderer _spriteRenderer;
     private int flipX;
-
+    
+    private GameObject _player;
     private bool moveNormally = true;
     void Awake()
     {
@@ -21,6 +22,7 @@ public class EnemyController : MonoBehaviour
         _audioManager = FindObjectOfType<AudioManager>();
         //_enemyManager = FindObjectOfType<EnemyManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _player = FindObjectOfType<PlayerController>().gameObject;
     }
 
     void FixedUpdate()
@@ -57,16 +59,14 @@ public class EnemyController : MonoBehaviour
         _spriteRenderer.color = colorTo;
     }
 
-    void OnBecameInvisible()
+   /* void OnBecameInvisible()
     {
         Destroy(this.gameObject);
-    }
-
+    }*/
 
     public void FaceCenter()
     {
-        if (transform.position.x >= 0) _spriteRenderer.flipX = true;
-        else _spriteRenderer.flipX = false;
+        _spriteRenderer.flipX = transform.position.x >= _player.transform.position.x ?  true : false ;
     }
 
 

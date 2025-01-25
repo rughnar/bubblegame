@@ -3,7 +3,7 @@ using TMPro;
 using System.Collections;
 using System;
 
-public class BubbleController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     public TMP_Text heightText;
@@ -13,6 +13,7 @@ public class BubbleController : MonoBehaviour
     private bool hasLaunched;
     private float maxVelocityReached;
 
+    private bool reachedLowVelocity = false;
 
     void Awake()
     {
@@ -27,26 +28,22 @@ public class BubbleController : MonoBehaviour
 
     void Update()
     {
-        if (_rb2D.velocity.magnitude > maxVelocityReached)
-        {
-            maxVelocityReached = _rb2D.velocity.magnitude;
-        }
-        if(_rb2D.velocity.y >= Mathf.Epsilon && _rb2D.velocity.y <= 0.1f){
-            StartCoroutine(DisableGravityFor(1f));
-        }
+        if (_rb2D.velocity.magnitude > maxVelocityReached) maxVelocityReached = _rb2D.velocity.magnitude;
+        if(!reachedLowVelocity && _rb2D.velocity.y >= 0.02f && _rb2D.velocity.y <= 0.1f) StartCoroutine(DisableGravityFor(1f));
+        if(reachedLowVelocity && (_rb2D.velocity.x > 0.1 || _rb2D.velocity.y > 0.1 )) reachedLowVelocity = false; 
+        if((_rb2D.velocity.x < 0.0001 && _rb2D.velocity.x > 0) || (_rb2D.velocity.y < 0.0001 & _rb2D.velocity.y > 0)) _rb2D.velocity = Vector2.zero;
     }
 
     void FixedUpdate()
     {
 
-        if (hasLaunched && _rb2D.velocity.y <= 0)
+        if (hasLaunched && _rb2D.velocity.y <= 0 && _rb2D.velocity.x <= 0)
         {
             _rb2D.velocity = Vector2.zero;
             _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
-            FindObjectOfType<GameManager>().End(maxVelocityReached, _rb2D.position.y);
+            FindObjectOfType<GameManager>().End(LimitDecimals(maxVelocityReached,0), LimitDecimals(_rb2D.position.y,1));
             Debug.Log("Fin de juego");
             this.enabled = false;
-
         }
 
 
@@ -54,11 +51,11 @@ public class BubbleController : MonoBehaviour
 
 
     public IEnumerator DisableGravityFor(float seconds){
+        reachedLowVelocity  = true;
         float oldGravityValue = _rb2D.gravityScale;
         _rb2D.gravityScale = 0;
         yield return new WaitForSeconds(seconds);
         _rb2D.gravityScale = oldGravityValue;
-
     }
 
     public float LimitDecimals(float value, int decimals)

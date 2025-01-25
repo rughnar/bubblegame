@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using Unity.VisualScripting;
 
 public class EnemyManager : MonoBehaviour
 {
     public List<int> enemiesPriority;
-    //public List<float> enemiesQuantity;
     [SerializeField] private List<GameObject> enemyPrefabs;
-    [SerializeField] private List<Transform> spawnPoints;
-    [SerializeField] private List<Sprite> enemySprites;
-    //[SerializeField] private List<HatController> hats;
-    //[SerializeField] private int maxEnemiesAtTheSameTime = 999;
+    [SerializeField] private Transform spawnPointRangeStart;
+    [SerializeField] private Transform spawnPointRangeEnd;
     [SerializeField] private float timeBetweenSpawns = 4f;
 
     private GameManager gameManager;
@@ -22,21 +20,15 @@ public class EnemyManager : MonoBehaviour
     private List<int> currentSpawnedEnemies;
     private int totalEnemiesToSpawn = 0;
 
+    private float spawnMinX, spawnMaxX,spawnMinY,spawnMaxY;
+
+
     System.Random rnd = new System.Random();
     void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
         lastEnemySpawnTime = 0f;
-        Spawn(1);
         currentSpawnedEnemies = new List<int>();
-        /*if (enemiesQuantity != null)
-        {
-            foreach (int enemyQuantity in enemiesQuantity)
-            {
-                totalEnemiesToSpawn += enemyQuantity;
-                currentSpawnedEnemies.Add(0);
-            }
-        }*/
 
     }
 
@@ -51,12 +43,7 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn(int quantity)
     {
-        //&& currentEnemiesOnLevel < maxEnemiesAtTheSameTime
-        //if (quantityEnemiesDestroyed + currentEnemiesOnLevel < totalEnemiesToSpawn)
-
         SpawnRandomEnemy();
-        //currentEnemiesOnLevel++;
-
     }
 
     public void EnemyTakenDown()
@@ -69,11 +56,19 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public Vector2 GetRandomSpawnPoint(){
+        spawnMinX = Math.Min(spawnPointRangeStart.position.x, spawnPointRangeEnd.position.x);
+        spawnMaxX = Math.Max(spawnPointRangeStart.position.x, spawnPointRangeEnd.position.x);
+        spawnMinY = Math.Min(spawnPointRangeStart.position.y, spawnPointRangeEnd.position.y);
+        spawnMaxY = Math.Max(spawnPointRangeStart.position.y, spawnPointRangeEnd.position.y);
+        return new Vector2(UnityEngine.Random.Range(spawnMinX,spawnMaxX),UnityEngine.Random.Range(spawnMinY,spawnMaxY));
+    }
+
 
     private void SpawnRandomEnemy()
     {
 
-        GameObject enemy = Instantiate(GetObjectWithMaxProb(), spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)].position, Quaternion.identity);
+        GameObject enemy = Instantiate(GetObjectWithMaxProb(), GetRandomSpawnPoint(), Quaternion.identity);
         enemy.GetComponent<EnemyController>().FaceCenter();
         /*if (enemy.CompareTag("HatWielder"))
         {
