@@ -31,10 +31,14 @@ public class BubbleController : MonoBehaviour
         {
             maxVelocityReached = _rb2D.velocity.magnitude;
         }
+        if(_rb2D.velocity.y >= Mathf.Epsilon && _rb2D.velocity.y <= 0.1f){
+            StartCoroutine(DisableGravityFor(1f));
+        }
     }
 
     void FixedUpdate()
     {
+
         if (hasLaunched && _rb2D.velocity.y <= 0)
         {
             _rb2D.velocity = Vector2.zero;
@@ -48,6 +52,14 @@ public class BubbleController : MonoBehaviour
 
     }
 
+
+    public IEnumerator DisableGravityFor(float seconds){
+        float oldGravityValue = _rb2D.gravityScale;
+        _rb2D.gravityScale = 0;
+        yield return new WaitForSeconds(seconds);
+        _rb2D.gravityScale = oldGravityValue;
+
+    }
 
     public float LimitDecimals(float value, int decimals)
     {
