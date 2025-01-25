@@ -9,8 +9,6 @@ public class BubbleController : MonoBehaviour
     public TMP_Text heightText;
     public TMP_Text velocityText;
     private Rigidbody2D _rb2D;
-    private float currentValue = 0f;
-    private float targetValue = 0f;
     private SpriteRenderer spriteRenderer;
     private bool hasLaunched;
     private float maxVelocityReached;

@@ -1,27 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
+using TMPro;
+using Cinemachine;
 public class GameManager : MonoBehaviour
-{
+{   
+    public GameObject velocityBar;
+    public TMP_Text heightText;
+    public TMP_Text velocityText;
+    public float cameraOffsetBeforeShot;
+    public float cameraOffsetAfterShot = 0f;
     public GameObject scoreMenu;
     public GameObject pauseScreen;
+    public CinemachineCameraOffset cinemachineCameraOffset;
     private AudioManager audioManager;
     private UIController uIController;
     private ScoreMenuController scoreMenuController;
     private ShopController shopController;
-    private int playerMoney = 0;
-
+    [SerializeField] private int playerMoney = 0;
     void Awake()
     {
+        velocityBar.gameObject.SetActive(true);
         uIController = FindObjectOfType<UIController>();
         scoreMenuController = scoreMenu.GetComponent<ScoreMenuController>();
         shopController = FindObjectOfType<ShopController>();
+        cameraOffsetBeforeShot = cinemachineCameraOffset.m_Offset.y;
+        heightText.enabled = false;
+        velocityText.enabled = false;
+
     }
     // Start is called before the first frame update
 
@@ -58,6 +67,15 @@ public class GameManager : MonoBehaviour
     public int GetPlayerMoney()
     {
         return playerMoney;
+    }
+
+    public void PlayerWasShot()
+    {
+        cinemachineCameraOffset.m_Offset = new Vector3 (0f, cameraOffsetAfterShot, 0f);
+        velocityBar.gameObject.SetActive(false);
+        heightText.enabled = true;
+        velocityText.enabled = true;
+        velocityBar.SetActive(false);
     }
 
 }

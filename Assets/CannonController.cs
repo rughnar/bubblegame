@@ -1,31 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+
 
 public class CannonController : MonoBehaviour
 {
     public float fireForce = 25;
     public float rotationSpeed = 10f;
     public VelocityBarController velocityBar;
-    public TMP_Text heightText;
-    public TMP_Text velocityText;
+
     private BubbleController bubbleController;
     private PlayerInputActions playerInputActions;
     private InputAction _fire;
     private Vector3 direction;
+    private GameManager gameManager;
+
     void Awake()
     {
-
         bubbleController = FindObjectOfType<BubbleController>();
         velocityBar = FindObjectOfType<VelocityBarController>();
         bubbleController.SoftDisable();
-        velocityBar.gameObject.SetActive(true);
-        heightText.enabled = false;
-        velocityText.enabled = false;
         playerInputActions = new PlayerInputActions();
+        gameManager = FindObjectOfType<GameManager>();
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Confined;
     }
@@ -67,10 +64,9 @@ public class CannonController : MonoBehaviour
     {
         bubbleController.SoftEnable();
         float force = velocityBar.GetValue();
-        velocityBar.gameObject.SetActive(false);
         bubbleController.ApplyForce(direction.normalized * force * fireForce);
-        heightText.enabled = true;
-        velocityText.enabled = true;
+
+        gameManager.PlayerWasShot();
         this.enabled = false;
     }
 }
