@@ -15,13 +15,15 @@ public class TopScroller : MonoBehaviour
         float deltaY = player.transform.position.y - lastPosition.y;
         if (Mathf.Abs(deltaY) > Mathf.Epsilon)
         {
-            uvRectPosition =  _img.uvRect.position;
+            uvRectPosition = _img.uvRect.position;
             uvRectPosition.y += deltaY > 0 ? uvChangeAmount : -uvChangeAmount;
-            _img.uvRect = new Rect(uvRectPosition , _img.uvRect.size);
+            _img.uvRect = new Rect(uvRectPosition, _img.uvRect.size);
             lastPosition = player.transform.position;
         }
+
+
     }
 
-    
+
 }
 

@@ -16,9 +16,10 @@ public class GameManager : MonoBehaviour
     public GameObject scoreMenu;
     public GameObject pauseScreen;
     public CinemachineCameraOffset cinemachineCameraOffset;
+    public Canvas UICanvas;
     private AudioManager audioManager;
     private UIController uIController;
-    private ScoreMenuController scoreMenuController;
+    public ScoreMenuController scoreMenuController;
     private ShopController shopController;
     [SerializeField] private int playerMoney = 0;
     private float recordHeight = 0f;
@@ -27,12 +28,13 @@ public class GameManager : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         velocityBar.gameObject.SetActive(true);
         uIController = FindObjectOfType<UIController>();
-        scoreMenuController = scoreMenu.GetComponent<ScoreMenuController>();
+        //scoreMenuController = FindObjectOfType<ScoreMenuController>();
         shopController = FindObjectOfType<ShopController>();
         cameraOffsetBeforeShot = cinemachineCameraOffset.m_Offset.y;
         heightText.enabled = false;
         velocityText.enabled = false;
         recordHeightText.enabled = false;
+
         recordHeight = PlayerPrefs.GetFloat("recordHeight");
         recordHeightText.text = "" + recordHeight + " m";
     }
@@ -46,6 +48,8 @@ public class GameManager : MonoBehaviour
         pauseScreen.SetActive(true);
         audioManager.PlaySFX(endSound);
         scoreMenu.SetActive(true);
+        UICanvas.enabled = false;
+        Time.timeScale = 0F;
         float score = Mathf.Ceil(Mathf.Round(maxDistanceReached) + maxVelocityReached * 0.66f);
         playerMoney += (int)score;
         Debug.Log(playerMoney);
