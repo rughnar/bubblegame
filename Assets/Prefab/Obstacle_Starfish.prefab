@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6619743109221175552}
   - component: {fileID: 8694417453884250356}
   - component: {fileID: 5775301951328995923}
-  - component: {fileID: 2429510734349179486}
+  - component: {fileID: 4800241520154595158}
   m_Layer: 3
   m_Name: Obstacle_Starfish
   m_TagString: Enemy
@@ -130,8 +130,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &2429510734349179486
-CapsuleCollider2D:
+--- !u!58 &4800241520154595158
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -145,7 +145,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -162,6 +162,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28, y: 0}
-  m_Size: {x: 3.64, y: 2.18}
-  m_Direction: 1
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.4371634

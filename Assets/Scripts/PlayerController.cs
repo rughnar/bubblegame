@@ -13,10 +13,10 @@ public class PlayerController : MonoBehaviour
     private bool hasLaunched;
     private float maxVelocityReached;
 
-    private bool reachedLowVelocity = false;
-
+    private Animator animator;
     void Awake()
     {
+        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         _rb2D = GetComponent<Rigidbody2D>();
         StartCoroutine(UpdateHeight());
@@ -30,30 +30,48 @@ public class PlayerController : MonoBehaviour
     {
         if (_rb2D.velocity.magnitude > maxVelocityReached) maxVelocityReached = _rb2D.velocity.magnitude;
 
-        if (!reachedLowVelocity && _rb2D.velocity.y >= 0.02f && _rb2D.velocity.y <= 0.1f) StartCoroutine(DisableGravityFor(1f));
-        if (reachedLowVelocity && (_rb2D.velocity.x > 0.1 || _rb2D.velocity.y > 0.1)) reachedLowVelocity = false;
-        if (_rb2D.velocity.x < 0.0001 && _rb2D.velocity.x > 0 && _rb2D.velocity.y < 0.0001 & _rb2D.velocity.y > 0) _rb2D.velocity = Vector2.zero;
     }
 
     void FixedUpdate()
     {
 
-        if (hasLaunched && _rb2D.velocity.y <= 0 && _rb2D.velocity.x <= 0)
+        if (hasLaunched && Mathf.Abs(_rb2D.velocity.x) < 0.5 && Mathf.Abs(_rb2D.velocity.y) < 0.5)
         {
-            _rb2D.velocity = Vector2.zero;
-            _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
-            FindObjectOfType<GameManager>().End(LimitDecimals(maxVelocityReached, 0), LimitDecimals(_rb2D.position.y, 1));
-            Debug.Log("Fin de juego");
-            this.enabled = false;
+            StartCoroutine(IsDeaccelerating());
         }
 
 
     }
 
+    public IEnumerator IsDeaccelerating()
+    {
+        yield return new WaitForSeconds(3f);
+        if (Mathf.Abs(_rb2D.velocity.x) <= 0.1 && Mathf.Abs(_rb2D.velocity.y) < 1)
+        {
+            _rb2D.velocity = Vector2.zero;
+            _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
+            animator.SetTrigger("explode");
+            yield return new WaitForSeconds(1f);
+            FindObjectOfType<GameManager>().End(LimitDecimals(maxVelocityReached, 0), LimitDecimals(_rb2D.position.y, 1));
+            Debug.Log("Fin de juego");
+            this.enabled = false;
+        }
+    }
+
+    public IEnumerator End()
+    {
+        _rb2D.velocity = Vector2.zero;
+        _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
+        animator.SetTrigger("explode");
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<GameManager>().End(LimitDecimals(maxVelocityReached, 0), LimitDecimals(_rb2D.position.y, 1));
+        Debug.Log("Fin de juego");
+        this.enabled = false;
+    }
+
 
     public IEnumerator DisableGravityFor(float seconds)
     {
-        reachedLowVelocity = true;
         float oldGravityValue = _rb2D.gravityScale;
         _rb2D.gravityScale = 0;
         yield return new WaitForSeconds(seconds);

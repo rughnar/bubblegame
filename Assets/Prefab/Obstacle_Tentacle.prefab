@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6619743109221175552}
   - component: {fileID: 8694417453884250356}
   - component: {fileID: 5775301951328995923}
-  - component: {fileID: 2429510734349179486}
+  - component: {fileID: 786032796020180740}
   m_Layer: 3
   m_Name: Obstacle_Tentacle
   m_TagString: Enemy
@@ -130,8 +130,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &2429510734349179486
-CapsuleCollider2D:
+--- !u!61 &786032796020180740
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -145,7 +145,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -162,6 +162,16 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28, y: 0}
-  m_Size: {x: 3.64, y: 2.18}
-  m_Direction: 1
+  m_Offset: {x: 0, y: 0.07892895}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.94, y: 2.68}
+    newSize: {x: 4.62, y: 2.86}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4.94, y: 1.5552597}
+  m_EdgeRadius: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6619743109221175552}
   - component: {fileID: 8694417453884250356}
   - component: {fileID: 5775301951328995923}
-  - component: {fileID: 2429510734349179486}
+  - component: {fileID: 1900174695007858212}
   m_Layer: 3
   m_Name: Obstacle_Pufferfish
   m_TagString: Enemy
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 436663549014637687}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1, y: 8.62, z: 0}
+  m_LocalPosition: {x: -2.073, y: 8.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -130,8 +130,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &2429510734349179486
-CapsuleCollider2D:
+--- !u!58 &1900174695007858212
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -145,7 +145,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -162,6 +162,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.28, y: 0}
-  m_Size: {x: 3.64, y: 2.18}
-  m_Direction: 1
+  m_Offset: {x: 0.2, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.5505593

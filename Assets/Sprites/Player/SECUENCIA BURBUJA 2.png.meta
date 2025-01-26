@@ -1,0 +1,292 @@
+fileFormatVersion: 2
+guid: 72df99f24c79e7d4d943fd2b07e797f4
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 150
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SECUENCIA BURBUJA 2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 480
+        height: 437
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81552ec8907bcff49b2bd4075ccafbe5
+      internalID: -578508879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SECUENCIA BURBUJA 2_1
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 0
+        width: 480
+        height: 437
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f9201b7287196144b19fa1d12a8f9f8
+      internalID: -454457492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SECUENCIA BURBUJA 2_2
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 0
+        width: 480
+        height: 437
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f72e0a6d3ff0245a30e19f57254f8a
+      internalID: -526336375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SECUENCIA BURBUJA 2_3
+      rect:
+        serializedVersion: 2
+        x: 1974
+        y: 0
+        width: 480
+        height: 437
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 894ed0a1ff09bcf46ae9a7b3a5da1436
+      internalID: 1087522115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SECUENCIA BURBUJA 2_4
+      rect:
+        serializedVersion: 2
+        x: 2598
+        y: 0
+        width: 480
+        height: 437
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 313190cc927ff5d458ce24f35fb311df
+      internalID: 1062662162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SECUENCIA BURBUJA 2_5
+      rect:
+        serializedVersion: 2
+        x: 3221
+        y: 0
+        width: 306
+        height: 437
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c45ed0f0dcb76439bb28d6ed907947
+      internalID: 648735986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      SECUENCIA BURBUJA 2_0: -578508879
+      SECUENCIA BURBUJA 2_1: -454457492
+      SECUENCIA BURBUJA 2_10: 507005319
+      SECUENCIA BURBUJA 2_11: -266365186
+      SECUENCIA BURBUJA 2_12: 1625388844
+      SECUENCIA BURBUJA 2_13: -1770572377
+      SECUENCIA BURBUJA 2_14: -8958709
+      SECUENCIA BURBUJA 2_15: -1242949649
+      SECUENCIA BURBUJA 2_16: 663778829
+      SECUENCIA BURBUJA 2_17: 1890520100
+      SECUENCIA BURBUJA 2_18: -1100025287
+      SECUENCIA BURBUJA 2_19: -637233718
+      SECUENCIA BURBUJA 2_2: -526336375
+      SECUENCIA BURBUJA 2_20: -1920581168
+      SECUENCIA BURBUJA 2_21: 942388036
+      SECUENCIA BURBUJA 2_22: -733879154
+      SECUENCIA BURBUJA 2_23: 2085208070
+      SECUENCIA BURBUJA 2_24: 749227034
+      SECUENCIA BURBUJA 2_25: 219212681
+      SECUENCIA BURBUJA 2_26: 436655041
+      SECUENCIA BURBUJA 2_27: 1550986650
+      SECUENCIA BURBUJA 2_28: -1779000933
+      SECUENCIA BURBUJA 2_29: -533380485
+      SECUENCIA BURBUJA 2_3: 1087522115
+      SECUENCIA BURBUJA 2_30: -1749851184
+      SECUENCIA BURBUJA 2_31: -506005743
+      SECUENCIA BURBUJA 2_32: -447609134
+      SECUENCIA BURBUJA 2_33: 1531769251
+      SECUENCIA BURBUJA 2_34: -842981047
+      SECUENCIA BURBUJA 2_35: -355347185
+      SECUENCIA BURBUJA 2_36: -1228599676
+      SECUENCIA BURBUJA 2_37: 15641275
+      SECUENCIA BURBUJA 2_38: -1143204181
+      SECUENCIA BURBUJA 2_4: 1062662162
+      SECUENCIA BURBUJA 2_5: 648735986
+      SECUENCIA BURBUJA 2_6: -655393452
+      SECUENCIA BURBUJA 2_7: 619298813
+      SECUENCIA BURBUJA 2_8: -762672006
+      SECUENCIA BURBUJA 2_9: -187213092
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
