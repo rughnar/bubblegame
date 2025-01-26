@@ -12,15 +12,13 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Transform spawnPointRangeStart;
     [SerializeField] private Transform spawnPointRangeEnd;
     [SerializeField] private float timeBetweenSpawns = 4f;
-
+    public int maxEnemiesQty = 100;
     private GameManager gameManager;
-    private int currentEnemiesOnLevel = 0;
-    public int quantityEnemiesDestroyed = 0;
+    [SerializeField] private int currentEnemiesQty = 0;
+    //public int quantityEnemiesDestroyed = 0;
     private float lastEnemySpawnTime = 0f;
-    private List<int> currentSpawnedEnemies;
-    private int totalEnemiesToSpawn = 0;
 
-    private float spawnMinX, spawnMaxX,spawnMinY,spawnMaxY;
+    private float spawnMinX, spawnMaxX, spawnMinY, spawnMaxY;
 
 
     System.Random rnd = new System.Random();
@@ -28,7 +26,7 @@ public class EnemyManager : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         lastEnemySpawnTime = 0f;
-        currentSpawnedEnemies = new List<int>();
+        //currentSpawnedEnemies = new List<int>();
 
     }
 
@@ -43,25 +41,28 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn(int quantity)
     {
-        SpawnRandomEnemy();
+        if (currentEnemiesQty < maxEnemiesQty)
+        {
+            SpawnRandomEnemy();
+        }
+        else
+        {
+            Debug.Log("Cantidad de enemigos maxima alcanzada");
+        }
     }
 
     public void EnemyTakenDown()
     {
-        currentEnemiesOnLevel -= 1;
-        quantityEnemiesDestroyed += 1;
-        if (quantityEnemiesDestroyed == totalEnemiesToSpawn)
-        {
-            //gameManager.EndLevel();
-        }
+        currentEnemiesQty -= 1;
     }
 
-    public Vector2 GetRandomSpawnPoint(){
+    public Vector2 GetRandomSpawnPoint()
+    {
         spawnMinX = Math.Min(spawnPointRangeStart.position.x, spawnPointRangeEnd.position.x);
         spawnMaxX = Math.Max(spawnPointRangeStart.position.x, spawnPointRangeEnd.position.x);
         spawnMinY = Math.Min(spawnPointRangeStart.position.y, spawnPointRangeEnd.position.y);
         spawnMaxY = Math.Max(spawnPointRangeStart.position.y, spawnPointRangeEnd.position.y);
-        return new Vector2(UnityEngine.Random.Range(spawnMinX,spawnMaxX),UnityEngine.Random.Range(spawnMinY,spawnMaxY));
+        return new Vector2(UnityEngine.Random.Range(spawnMinX, spawnMaxX), UnityEngine.Random.Range(spawnMinY, spawnMaxY));
     }
 
 
@@ -70,6 +71,7 @@ public class EnemyManager : MonoBehaviour
 
         GameObject enemy = Instantiate(GetObjectWithMaxProb(), GetRandomSpawnPoint(), Quaternion.identity);
         enemy.GetComponent<EnemyController>().FaceCenter();
+        currentEnemiesQty += 1;
         /*if (enemy.CompareTag("HatWielder"))
         {
             enemy.GetComponent<SpriteRenderer>().sprite = enemySprites[UnityEngine.Random.Range(0, enemySprites.Count)];

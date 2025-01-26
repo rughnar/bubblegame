@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     public AudioClip destroy;
     private Rigidbody2D _rb;
     private AudioManager _audioManager;
-    //private EnemyManager _enemyManager;
+    private EnemyManager _enemyManager;
     private SpriteRenderer _spriteRenderer;
     private int flipX;
     private GameObject _player;
@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _audioManager = FindObjectOfType<AudioManager>();
-        //_enemyManager = FindObjectOfType<EnemyManager>();
+        _enemyManager = FindObjectOfType<EnemyManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _player = FindObjectOfType<PlayerController>().gameObject;
         _camera = FindObjectOfType<Camera>();
@@ -47,11 +47,17 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (IsOffCamera())
         {
-            Destroy(this.gameObject);
+            Die();
         }
     }
 
-    public void ReduceHealth(float hp)
+    public void Die()
+    {
+        Destroy(this.gameObject);
+        _enemyManager.EnemyTakenDown();
+    }
+
+    /*public void ReduceHealth(float hp)
     {
         this.hp -= hp;
         if (this.hp <= 0)
@@ -66,7 +72,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(GoFromColorToColorIn(0.2f, Color.red, Color.white));
         }
 
-    }
+    }*/
 
 
     IEnumerator GoFromColorToColorIn(float seconds, Color colorFrom, Color colorTo)
@@ -76,11 +82,11 @@ public class EnemyController : MonoBehaviour
         _spriteRenderer.color = colorTo;
     }
 
-    void OnBecameInvisible()
-    {
+    /* void OnBecameInvisible()
+     {
 
-        Destroy(this.gameObject);
-    }
+         Destroy(this.gameObject);
+     }*/
 
     public void FaceCenter()
     {
