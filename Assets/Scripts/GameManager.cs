@@ -1,16 +1,15 @@
-using Unity.VisualScripting;
-using UnityEditor;
+using System;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
-{   
+{
     public GameObject velocityBar;
     public TMP_Text heightText;
     public TMP_Text velocityText;
+    public TMP_Text recordHeightText;
     public float cameraOffsetBeforeShot;
     public float cameraOffsetAfterShot = 0f;
     public GameObject scoreMenu;
@@ -21,6 +20,7 @@ public class GameManager : MonoBehaviour
     private ScoreMenuController scoreMenuController;
     private ShopController shopController;
     [SerializeField] private int playerMoney = 0;
+    private float recordHeight = 0f;
     void Awake()
     {
         velocityBar.gameObject.SetActive(true);
@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
         cameraOffsetBeforeShot = cinemachineCameraOffset.m_Offset.y;
         heightText.enabled = false;
         velocityText.enabled = false;
-
+        recordHeightText.enabled = false;
+        recordHeight = PlayerPrefs.GetFloat("recordHeight");
+        recordHeightText.text = "" + recordHeight;
     }
     // Start is called before the first frame update
 
@@ -44,7 +46,8 @@ public class GameManager : MonoBehaviour
         float score = Mathf.Ceil(Mathf.Round(maxDistanceReached) + maxVelocityReached * 0.66f);
         playerMoney += (int)score;
         Debug.Log(playerMoney);
-        PlayerPrefs.SetInt("playerMoney", playerMoney);
+        if (maxDistanceReached > recordHeight) PlayerPrefs.SetFloat("recordHeight", maxDistanceReached);
+        PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + playerMoney);
         PlayerPrefs.Save();
         scoreMenuController.SetMaxValues(maxDistanceReached, maxVelocityReached, score);
     }
@@ -71,10 +74,11 @@ public class GameManager : MonoBehaviour
 
     public void PlayerWasShot()
     {
-        cinemachineCameraOffset.m_Offset = new Vector3 (0f, cameraOffsetAfterShot, 0f);
+        cinemachineCameraOffset.m_Offset = new Vector3(0f, cameraOffsetAfterShot, 0f);
         velocityBar.gameObject.SetActive(false);
         heightText.enabled = true;
         velocityText.enabled = true;
+        recordHeightText.enabled = true;
         velocityBar.SetActive(false);
     }
 
