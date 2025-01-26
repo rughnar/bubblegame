@@ -5,6 +5,7 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioClip death;
     public float hp = 1;
     public TMP_Text heightText;
     public TMP_Text velocityText;
@@ -12,13 +13,16 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool hasLaunched;
     private float maxVelocityReached;
-
+    private Collider2D _collider2D;
     private Animator animator;
+    private AudioManager audioManager;
     void Awake()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         _rb2D = GetComponent<Rigidbody2D>();
+        _collider2D = GetComponent<Collider2D>();
         StartCoroutine(UpdateHeight());
         StartCoroutine(UpdateVelocity());
         hasLaunched = false;
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
         _rb2D.velocity = Vector2.zero;
         _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
         animator.SetTrigger("explode");
+        audioManager.PlaySFX(death);
         yield return new WaitForSeconds(1f);
         FindObjectOfType<GameManager>().End(LimitDecimals(maxVelocityReached, 0), LimitDecimals(_rb2D.position.y, 1));
         this.enabled = false;
@@ -129,5 +134,28 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Floor")) StartCoroutine(Die(1f));
+    }
+
+    public void DisableCollider()
+    {
+        _collider2D.enabled = false;
+    }
+    public void EnableCollider()
+    {
+        _collider2D.enabled = true;
+    }
+    public void SwapSprite(Sprite sprite)
+    {
+        spriteRenderer.sprite = sprite;
+    }
+
+    public Sprite GetSprite()
+    {
+        return spriteRenderer.sprite;
+    }
+
+    public void ChangeTo(Color color)
+    {
+        spriteRenderer.color = color;
     }
 }

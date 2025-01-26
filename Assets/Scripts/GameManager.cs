@@ -6,6 +6,7 @@ using Cinemachine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
+    public AudioClip endSound;
     public GameObject velocityBar;
     public TMP_Text heightText;
     public TMP_Text velocityText;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     private float recordHeight = 0f;
     void Awake()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         velocityBar.gameObject.SetActive(true);
         uIController = FindObjectOfType<UIController>();
         scoreMenuController = scoreMenu.GetComponent<ScoreMenuController>();
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("maxVelocityReached: " + maxVelocityReached);
         Debug.Log("maxDistanceReached: " + maxDistanceReached);
         pauseScreen.SetActive(true);
+        audioManager.PlaySFX(endSound);
         scoreMenu.SetActive(true);
         float score = Mathf.Ceil(Mathf.Round(maxDistanceReached) + maxVelocityReached * 0.66f);
         playerMoney += (int)score;

@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 
 
 public class CannonController : MonoBehaviour
+
 {
+    public AudioClip shoot;
     public float fireForce = 25;
     public float rotationSpeed = 10f;
     public VelocityBarController velocityBar;
@@ -16,6 +18,7 @@ public class CannonController : MonoBehaviour
     private Vector3 direction;
     private GameManager gameManager;
     private Animator cannonBaseAnimator;
+    private AudioManager audioManager;
 
     void Awake()
     {
@@ -25,6 +28,7 @@ public class CannonController : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         gameManager = FindObjectOfType<GameManager>();
         cannonBaseAnimator = cannonBase.GetComponent<Animator>();
+        audioManager = FindObjectOfType<AudioManager>();
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Confined;
     }
@@ -73,6 +77,7 @@ public class CannonController : MonoBehaviour
     {
         cannonBaseAnimator.SetTrigger("pull");
         yield return new WaitForSeconds(0.4f);
+        audioManager.PlaySFX(shoot);
         bubbleController.SoftEnable();
         float force = velocityBar.GetValue();
         bubbleController.ApplyForce(direction.normalized * force * fireForce);
