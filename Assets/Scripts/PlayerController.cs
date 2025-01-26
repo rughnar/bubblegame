@@ -29,9 +29,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (_rb2D.velocity.magnitude > maxVelocityReached) maxVelocityReached = _rb2D.velocity.magnitude;
-        if(!reachedLowVelocity && _rb2D.velocity.y >= 0.02f && _rb2D.velocity.y <= 0.1f) StartCoroutine(DisableGravityFor(1f));
-        if(reachedLowVelocity && (_rb2D.velocity.x > 0.1 || _rb2D.velocity.y > 0.1 )) reachedLowVelocity = false; 
-        if((_rb2D.velocity.x < 0.0001 && _rb2D.velocity.x > 0) || (_rb2D.velocity.y < 0.0001 & _rb2D.velocity.y > 0)) _rb2D.velocity = Vector2.zero;
+
+        if (!reachedLowVelocity && _rb2D.velocity.y >= 0.02f && _rb2D.velocity.y <= 0.1f) StartCoroutine(DisableGravityFor(1f));
+        if (reachedLowVelocity && (_rb2D.velocity.x > 0.1 || _rb2D.velocity.y > 0.1)) reachedLowVelocity = false;
+        if (_rb2D.velocity.x < 0.0001 && _rb2D.velocity.x > 0 && _rb2D.velocity.y < 0.0001 & _rb2D.velocity.y > 0) _rb2D.velocity = Vector2.zero;
     }
 
     void FixedUpdate()
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
         {
             _rb2D.velocity = Vector2.zero;
             _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
-            FindObjectOfType<GameManager>().End(LimitDecimals(maxVelocityReached,0), LimitDecimals(_rb2D.position.y,1));
+            FindObjectOfType<GameManager>().End(LimitDecimals(maxVelocityReached, 0), LimitDecimals(_rb2D.position.y, 1));
             Debug.Log("Fin de juego");
             this.enabled = false;
         }
@@ -50,8 +51,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public IEnumerator DisableGravityFor(float seconds){
-        reachedLowVelocity  = true;
+    public IEnumerator DisableGravityFor(float seconds)
+    {
+        reachedLowVelocity = true;
         float oldGravityValue = _rb2D.gravityScale;
         _rb2D.gravityScale = 0;
         yield return new WaitForSeconds(seconds);
