@@ -5,6 +5,7 @@ using System.ComponentModel.Design;
 
 public class EnemyController : MonoBehaviour
 {
+    public float secondsTillDeathOffCamera = 15f;
     public int damage = 10;
     public float velocity = 1f;
     public float hp;
@@ -15,7 +16,7 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private int flipX;
     private GameObject _player;
-    private bool moveNormally = true;
+    [SerializeField] private bool moveNormally = true;
     private Camera _camera;
     void Awake()
     {
@@ -37,7 +38,7 @@ public class EnemyController : MonoBehaviour
 
         if (IsOffCamera())
         {
-            StartCoroutine(CheckIfNotVisibleIn(60f));
+            StartCoroutine(CheckIfNotVisibleIn(secondsTillDeathOffCamera));
         }
     }
 
