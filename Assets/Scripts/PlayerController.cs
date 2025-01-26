@@ -5,7 +5,7 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public float hp = 1;
     public TMP_Text heightText;
     public TMP_Text velocityText;
     private Rigidbody2D _rb2D;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator IsDeaccelerating()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(8f);
         if (Mathf.Abs(_rb2D.velocity.x) <= 0.1 && Mathf.Abs(_rb2D.velocity.y) < 1)
         {
             _rb2D.velocity = Vector2.zero;
@@ -58,14 +58,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public IEnumerator End()
+    public IEnumerator Die()
     {
         _rb2D.velocity = Vector2.zero;
         _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
         animator.SetTrigger("explode");
         yield return new WaitForSeconds(1f);
         FindObjectOfType<GameManager>().End(LimitDecimals(maxVelocityReached, 0), LimitDecimals(_rb2D.position.y, 1));
-        Debug.Log("Fin de juego");
         this.enabled = false;
     }
 
@@ -113,7 +112,16 @@ public class PlayerController : MonoBehaviour
 
     public void ApplyForce(Vector2 force)
     {
-        _rb2D.AddForce(force, ForceMode2D.Impulse);
+        _rb2D.AddForce(force * 75, ForceMode2D.Force);
         hasLaunched = true;
+    }
+
+    public void RecieveDamage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            StartCoroutine(Die());
+        }
     }
 }

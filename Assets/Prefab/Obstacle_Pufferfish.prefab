@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acb1571a11ae5040a0f0998d03afd8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoints: 10
+  damage: 1
   velocity: 2
   hp: 0
   destroy: {fileID: 8300000, guid: 0fda5056f9de4b541a714dbbf3535cb3, type: 3}

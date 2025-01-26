@@ -9,12 +9,13 @@ public class CannonController : MonoBehaviour
     public float fireForce = 25;
     public float rotationSpeed = 10f;
     public VelocityBarController velocityBar;
-
+    public GameObject cannonBase;
     private PlayerController bubbleController;
     private PlayerInputActions playerInputActions;
     private InputAction _fire;
     private Vector3 direction;
     private GameManager gameManager;
+    private Animator cannonBaseAnimator;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class CannonController : MonoBehaviour
         bubbleController.SoftDisable();
         playerInputActions = new PlayerInputActions();
         gameManager = FindObjectOfType<GameManager>();
+        cannonBaseAnimator = cannonBase.GetComponent<Animator>();
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Confined;
     }
@@ -62,11 +64,19 @@ public class CannonController : MonoBehaviour
 
     void Fire(InputAction.CallbackContext callbackContext)
     {
+
+        StartCoroutine(FireWithDelay());
+
+    }
+
+    private IEnumerator FireWithDelay()
+    {
+        cannonBaseAnimator.SetTrigger("pull");
+        yield return new WaitForSeconds(0.4f);
         bubbleController.SoftEnable();
         float force = velocityBar.GetValue();
         bubbleController.ApplyForce(direction.normalized * force * fireForce);
-
         gameManager.PlayerWasShot();
-        this.enabled = false;
+        this.gameObject.gameObject.SetActive(false);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.Assertions.Must;
 
 public class EnemyController : MonoBehaviour
 {
-    public float attackPoints = 10;
+    public int damage = 10;
     public float velocity = 1f;
     public float hp;
     public AudioClip destroy;
@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
     //private EnemyManager _enemyManager;
     private SpriteRenderer _spriteRenderer;
     private int flipX;
-    
+
     private GameObject _player;
     private bool moveNormally = true;
     void Awake()
@@ -59,14 +59,14 @@ public class EnemyController : MonoBehaviour
         _spriteRenderer.color = colorTo;
     }
 
-   /* void OnBecameInvisible()
-    {
-        Destroy(this.gameObject);
-    }*/
+    /* void OnBecameInvisible()
+     {
+         Destroy(this.gameObject);
+     }*/
 
     public void FaceCenter()
     {
-        _spriteRenderer.flipX = transform.position.x >= _player.transform.position.x ?  true : false ;
+        _spriteRenderer.flipX = transform.position.x >= _player.transform.position.x ? true : false;
     }
 
 
@@ -78,5 +78,13 @@ public class EnemyController : MonoBehaviour
     {
         if (moveNormally) moveNormally = false;
         else moveNormally = true;
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerController>().RecieveDamage(damage);
+        }
     }
 }

@@ -711,6 +711,7 @@ MonoBehaviour:
   fireForce: 25
   rotationSpeed: 10
   velocityBar: {fileID: 1617032702}
+  cannonBase: {fileID: 1014000723}
 --- !u!1 &188486479
 GameObject:
   m_ObjectHideFlags: 0
@@ -3097,6 +3098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014000724}
   - component: {fileID: 1014000725}
+  - component: {fileID: 1014000726}
   m_Layer: 0
   m_Name: base
   m_TagString: Untagged
@@ -3171,6 +3173,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1014000726
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014000723}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da86a6a5bdcc8f8488358c03570f07c0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1051089193
 GameObject:
   m_ObjectHideFlags: 0
@@ -6728,6 +6751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68c056903dda5048a930504d68c95b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 1
   heightText: {fileID: 2119302397}
   velocityText: {fileID: 1288573806}
 --- !u!114 &2003149089
