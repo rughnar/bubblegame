@@ -58,8 +58,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public IEnumerator Die()
+    public IEnumerator Die(float timeTillDeath)
     {
+        yield return new WaitForSeconds(timeTillDeath);
         _rb2D.velocity = Vector2.zero;
         _rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
         animator.SetTrigger("explode");
@@ -121,7 +122,12 @@ public class PlayerController : MonoBehaviour
         hp -= damage;
         if (hp <= 0)
         {
-            StartCoroutine(Die());
+            StartCoroutine(Die(0));
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Floor")) StartCoroutine(Die(1f));
     }
 }

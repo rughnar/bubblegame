@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Assertions.Must;
+using System.ComponentModel.Design;
 
 public class EnemyController : MonoBehaviour
 {
@@ -13,9 +14,9 @@ public class EnemyController : MonoBehaviour
     //private EnemyManager _enemyManager;
     private SpriteRenderer _spriteRenderer;
     private int flipX;
-
     private GameObject _player;
     private bool moveNormally = true;
+    private Camera _camera;
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -23,6 +24,7 @@ public class EnemyController : MonoBehaviour
         //_enemyManager = FindObjectOfType<EnemyManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _player = FindObjectOfType<PlayerController>().gameObject;
+        _camera = FindObjectOfType<Camera>();
     }
 
     void FixedUpdate()
@@ -31,6 +33,21 @@ public class EnemyController : MonoBehaviour
         {
             flipX = _spriteRenderer.flipX ? -1 : 1;
             _rb.MovePosition(new Vector2(_rb.position.x + velocity * 0.01f * flipX, _rb.position.y));
+        }
+
+        if (IsOffCamera())
+        {
+            StartCoroutine(CheckIfNotVisibleIn(60f));
+        }
+    }
+
+
+    public IEnumerator CheckIfNotVisibleIn(float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (IsOffCamera())
+        {
+            Destroy(this.gameObject);
         }
     }
 
@@ -59,10 +76,11 @@ public class EnemyController : MonoBehaviour
         _spriteRenderer.color = colorTo;
     }
 
-    /* void OnBecameInvisible()
-     {
-         Destroy(this.gameObject);
-     }*/
+    void OnBecameInvisible()
+    {
+
+        Destroy(this.gameObject);
+    }
 
     public void FaceCenter()
     {
@@ -86,5 +104,11 @@ public class EnemyController : MonoBehaviour
         {
             other.gameObject.GetComponent<PlayerController>().RecieveDamage(damage);
         }
+    }
+
+    private bool IsOffCamera()
+    {
+        Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
+        return screenPoint.x < 0 || screenPoint.x > 1 || screenPoint.y < 0 || screenPoint.y > 1;
     }
 }

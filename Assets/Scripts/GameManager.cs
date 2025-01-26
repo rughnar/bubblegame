@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         velocityText.enabled = false;
         recordHeightText.enabled = false;
         recordHeight = PlayerPrefs.GetFloat("recordHeight");
-        recordHeightText.text = "" + recordHeight;
+        recordHeightText.text = "" + recordHeight + " m";
     }
     // Start is called before the first frame update
 

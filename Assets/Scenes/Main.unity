@@ -1116,9 +1116,10 @@ GameObject:
   - component: {fileID: 390357755}
   - component: {fileID: 390357754}
   - component: {fileID: 390357756}
+  - component: {fileID: 390357757}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1222,7 +1223,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.060958624}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1233,8 +1234,35 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.31, y: 7.51}
+  m_Size: {x: 7.31, y: 7.388083}
   m_EdgeRadius: 0
+--- !u!50 &390357757
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390357753}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &390525129
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,6 +1569,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1700,6 +1729,18 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31673fd9937e4f4fb64fb2f396e6305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &600534036 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8297524398975871237, guid: 45aba1f2e6ed02845a9d276a5c2b4e78, type: 3}
@@ -6225,13 +6266,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04b331e842c80e4f9c85748ae485909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesPriority: 5000000037000000320000000a00000003000000
+  enemiesPriority: 5000000037000000320000000a000000
   enemyPrefabs:
   - {fileID: 436663549014637687, guid: c8a780c328dbe5f4093cc1d78196ba1f, type: 3}
   - {fileID: 436663549014637687, guid: 2f3d59af790eb0640aa4980d7b206cfc, type: 3}
   - {fileID: 436663549014637687, guid: 2f7990635de396b45a59f2dd9deda267, type: 3}
   - {fileID: 436663549014637687, guid: af15df489119962448638d5333feec4b, type: 3}
-  - {fileID: 436663549014637687, guid: 3790b99d1f21a7d458bfa0e1baf6136c, type: 3}
   spawnPointRangeStart: {fileID: 888141601}
   spawnPointRangeEnd: {fileID: 67138987}
   timeBetweenSpawns: 3
